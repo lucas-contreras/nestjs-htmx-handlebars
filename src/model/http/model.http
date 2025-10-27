@@ -1,0 +1,39 @@
+# Model API - HTTP requests for VSCode REST Client (and curl examples)
+
+@baseUrl = http://localhost:3000
+@prefix = /api
+
+### Create a new model (POST /model)
+POST {{baseUrl}}{{prefix}}/model
+Content-Type: application/json
+
+{
+	"manufacturer": "Toyota",
+	"year": "2021",
+	"description": "Toyota Motor Corporation is a Japanese multinational automotive manufacturer headquartered in Toyota City, Aichi, Japan. It was founded by Kiichiro Toyoda and incorporated on August 28, 1937. Toyota is the largest automobile manufacturer in the world, producing about 10 million vehicles per year"
+}
+
+# Note: `CreateModelDto` in this project uses `@IsString()` on `year` so the example uses a string for year.
+
+### Get all models (GET /model)
+GET {{baseUrl}}{{prefix}}/model
+
+### Get a single model by id (GET /model/:id)
+GET {{baseUrl}}{{prefix}}/model/1
+
+# --- curl equivalents (PowerShell-friendly examples) ---
+# Create model using curl (PowerShell)
+# curl -X POST "${env:BASE_URL:-http://localhost:3000}${env:PREFIX:-}"/model -H 'Content-Type: application/json' -d '{"manufacturer":"Toyota","year":"2021","description":"Corolla SE"}'
+
+# Get all models
+# curl "${env:BASE_URL:-http://localhost:3000}${env:PREFIX:-}"/model
+
+# Get model by id
+# curl "${env:BASE_URL:-http://localhost:3000}${env:PREFIX:-}"/model/1
+
+### Delete a model by id (DELETE /model/:id)
+DELETE {{baseUrl}}{{prefix}}/model/1
+
+# Delete model by id (PowerShell-friendly curl)
+# curl -X DELETE "${env:BASE_URL:-http://localhost:3000}${env:PREFIX:-}"/model/1
+
