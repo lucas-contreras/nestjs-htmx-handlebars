@@ -1,0 +1,40 @@
+# Vehicle API - HTTP requests for VSCode REST Client (and curl examples)
+
+@baseUrl = http://localhost:3000
+@prefix = /api
+
+### Get all vehicles
+GET {{baseUrl}}{{prefix}}/vehicle
+Accept: application/json
+
+### Get single vehicle (id = 1)
+GET {{baseUrl}}{{prefix}}/vehicle/2
+Accept: application/json
+
+### Create vehicle
+POST {{baseUrl}}{{prefix}}/vehicle
+Content-Type: application/json
+
+{
+  "makeId": 2,
+  "model": "Civic",
+  "year": 2020,
+  "color": "black",
+  "mileage": 15000
+}
+
+### Update vehicle (id = 1)
+PUT {{baseUrl}}{{prefix}}/vehicle/1
+Content-Type: application/json
+
+{
+  "makeId": 1,
+  "model": "Accord",
+  "year": 2021,
+  "color": "white",
+  "mileage": 10000
+}
+
+### Delete vehicle (id = 1)
+DELETE {{baseUrl}}{{prefix}}/vehicle/1
+Accept: application/json

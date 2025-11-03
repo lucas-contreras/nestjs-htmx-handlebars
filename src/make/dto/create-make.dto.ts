@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class CreateModelDto {
+export class CreateMakeDto {
   @IsString()
   readonly manufacturer: string;
 

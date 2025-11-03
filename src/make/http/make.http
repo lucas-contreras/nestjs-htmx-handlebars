@@ -19,7 +19,7 @@ Content-Type: application/json
 GET {{baseUrl}}{{prefix}}/model
 
 ### Get a single model by id (GET /model/:id)
-GET {{baseUrl}}{{prefix}}/model/1
+GET {{baseUrl}}{{prefix}}/model/2
 
 # --- curl equivalents (PowerShell-friendly examples) ---
 # Create model using curl (PowerShell)

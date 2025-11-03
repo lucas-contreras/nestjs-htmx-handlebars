@@ -1,9 +1,10 @@
 import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { VehicleColor } from '../entity/vehicle.entity';
 
 export class CreateVehicleDto {
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  readonly make: string;
+  readonly makeId: number;
 
   @IsString()
   @IsNotEmpty()
@@ -15,9 +16,12 @@ export class CreateVehicleDto {
 
   @IsString()
   @IsOptional()
-  readonly color?: string;
+  readonly color?: VehicleColor;
 
   @IsNumber()
   @IsOptional()
   readonly mileage?: number;
+
+  @IsOptional()
+  readonly available: boolean;
 }
