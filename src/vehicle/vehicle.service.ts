@@ -12,7 +12,7 @@ export class VehicleService {
     private readonly vehicleRepository: Repository<Vehicle>,
   ) {}
 
-  async create(dto: CreateVehicleDto): Promise<Vehicle> {
+  async create(dto: CreateVehicleDto) {
     const entity = this.vehicleRepository.create({
       ...dto,
       make: { id: dto.makeId } as Make,
@@ -21,11 +21,11 @@ export class VehicleService {
     return this.vehicleRepository.save(entity);
   }
 
-  findAll(): Promise<Vehicle[]> {
+  findAll() {
     return this.vehicleRepository.find({ relations: ['make'] });
   }
 
-  async findOne(id: number): Promise<Vehicle> {
+  async findOne(id: number) {
     const found = await this.vehicleRepository.findOne({
       where: { id },
       relations: ['make'],
@@ -38,7 +38,7 @@ export class VehicleService {
     return found;
   }
 
-  async update(id: number, dto: CreateVehicleDto): Promise<Vehicle> {
+  async update(id: number, dto: CreateVehicleDto) {
     const entity: Vehicle = {
       id,
       color: dto.color,
@@ -58,7 +58,7 @@ export class VehicleService {
     return this.vehicleRepository.save(preloaded);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number) {
     const res = await this.vehicleRepository.delete(id);
 
     if (res.affected === 0) {

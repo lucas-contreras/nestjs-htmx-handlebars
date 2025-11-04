@@ -1,0 +1,67 @@
+# User API - HTTP requests for VSCode REST Client
+
+@baseUrl = http://localhost:8080
+@prefix = /api
+
+### Create a new user (POST /user)
+POST {{baseUrl}}{{prefix}}/user
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "securePassword123",
+  "role": "user"
+}
+
+### Create an admin user (POST /user)
+POST {{baseUrl}}{{prefix}}/user
+Content-Type: application/json
+
+{
+  "name": "Admin User",
+  "email": "admin@example.com",
+  "password": "adminPassword123",
+  "role": "admin"
+}
+
+### Create a moderator user (POST /user)
+POST {{baseUrl}}{{prefix}}/user
+Content-Type: application/json
+
+{
+  "name": "Moderator User",
+  "email": "moderator@example.com",
+  "password": "modPassword123",
+  "role": "moderator"
+}
+
+### Get all users (GET /user)
+# Returns filtered user data (password, deletedAt, deleted are excluded)
+GET {{baseUrl}}{{prefix}}/user
+
+### Get a single user by id (GET /user/:id)
+# Returns filtered user data (password, deletedAt, deleted are excluded)
+GET {{baseUrl}}{{prefix}}/user/1
+
+### Update user name (PATCH /user/:id)
+# Note: Only the name field can be updated. Email, password, and role cannot be changed via this endpoint.
+PATCH {{baseUrl}}{{prefix}}/user/1
+Content-Type: application/json
+
+{
+  "name": "John Updated"
+}
+
+### Change user password (PATCH /user/:id/password)
+# Note: Requires both oldPassword and newPassword
+PATCH {{baseUrl}}{{prefix}}/user/1/password
+Content-Type: application/json
+
+{
+  "oldPassword": "securePassword123",
+  "newPassword": "newSecurePassword456"
+}
+
+### Delete a user by id (DELETE /user/:id)
+DELETE {{baseUrl}}{{prefix}}/user/1

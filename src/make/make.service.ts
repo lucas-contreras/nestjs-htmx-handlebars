@@ -16,7 +16,7 @@ export class MakeService {
     return this.makesRepository.save(make);
   }
 
-  async findAll(): Promise<Make[]> {
+  async findAll() {
     return this.makesRepository.find();
   }
 

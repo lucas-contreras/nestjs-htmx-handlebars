@@ -4,10 +4,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { ModelModule } from './make/make.module';
+import { UserModule } from './user/user.module';
 import typeOrmConfig from './config/typeorm.config';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), ModelModule, VehicleModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    ModelModule,
+    VehicleModule,
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
