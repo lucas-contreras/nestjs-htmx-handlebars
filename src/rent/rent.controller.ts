@@ -1,9 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RentService } from './rent.service';
 import { CreateRentDto } from './dto/create-rent.dto';
 import { UpdateRentDto } from './dto/update-rent.dto';
+import { API_PREFIX } from 'src/constants';
 
-@Controller('rent')
+@Controller(`${API_PREFIX}/rent`)
 export class RentController {
   constructor(private readonly rentService: RentService) {}
 

@@ -11,8 +11,9 @@ import {
 } from '@nestjs/common';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { VehicleService } from './vehicle.service';
+import { API_PREFIX } from 'src/constants';
 
-@Controller('vehicle')
+@Controller(`${API_PREFIX}/vehicle`)
 export class VehicleController {
   constructor(private readonly service: VehicleService) {}
 

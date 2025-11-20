@@ -14,8 +14,9 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { plainToInstance } from 'class-transformer';
 import { UserResponseDto } from './dto/user-response.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { API_PREFIX } from 'src/constants';
 
-@Controller('user')
+@Controller(`${API_PREFIX}/user`)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

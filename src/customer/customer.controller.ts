@@ -11,14 +11,24 @@ import {
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { API_PREFIX } from 'src/constants';
 
-@Controller('customer')
+@Controller(`${API_PREFIX}/customer`)
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
   @Post()
   create(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.customerService.create(createCustomerDto);
+    console.log(createCustomerDto);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          successfulaaaa: true,
+          message: 'Customer created successfully',
+        });
+      }, 9000);
+    });
   }
 
   @Get()

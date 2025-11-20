@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { MakeService } from './make.service';
 import { CreateMakeDto } from './dto/create-make.dto';
+import { API_PREFIX } from 'src/constants';
 
-@Controller('make')
+@Controller(`${API_PREFIX}/make`)
 export class MakeController {
   constructor(private readonly makeService: MakeService) {}
 

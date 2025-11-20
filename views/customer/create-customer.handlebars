@@ -1,0 +1,185 @@
+<div class="container">
+    <h1>{{ title }}</h1>
+
+    <div id="success-notification" class="notification notification-success" style="display: none;">
+        <span class="notification-icon">✓</span>
+        <span class="notification-message">A new customer has been created successfully!</span>
+    </div>
+
+    <form hx-post="/api/customer" hx-target="#customer-result" hx-swap="innerHTML" class="customer-form"
+        hx-disabled-elt="button[type=submit]"
+        hx-on::after-request="if(event.detail.successful) { document.getElementById('success-notification').style.display='block'; setTimeout(() => { document.getElementById('success-notification').style.display='none'; }, 5000); }">
+
+        <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required class="form-control" placeholder="Enter customer name">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required class="form-control" placeholder="Enter email address">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter phone number">
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" class="form-control" rows="3" placeholder="Enter address"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="identificationType">Identification Type</label>
+            <select id="identificationType" name="identificationType" class="form-control">
+                <option value="">Select identification type</option>
+                {{#each identificationTypes}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="identificationNumber">Identification Number</label>
+            <input type="text" id="identificationNumber" name="identificationNumber" class="form-control"
+                placeholder="Enter identification number">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Create Customer</button>
+            <a href="/api/customer" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div id="customer-result"></div>
+</div>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+    }
+
+    h1 {
+        margin-bottom: 2rem;
+        color: #333;
+    }
+
+    .notification {
+        padding: 1rem 1.5rem;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .notification-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+    }
+
+    .notification-icon {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .notification-message {
+        flex: 1;
+        font-weight: 500;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .customer-form {
+        background: #f9f9f9;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #555;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.2s;
+    }
+
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #545b62;
+    }
+
+    #customer-result {
+        margin-top: 2rem;
+    }
+</style>
