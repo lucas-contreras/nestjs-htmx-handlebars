@@ -3,36 +3,36 @@
 
     <div id="success-notification" class="notification notification-success" style="display: none;">
         <span class="notification-icon">✓</span>
-        <span class="notification-message">A new customer has been created successfully!</span>
+        <span class="notification-message">Customer updated successfully!</span>
     </div>
 
-    <form hx-post="/api/customer" hx-swap="none" class="customer-form"
+    <form hx-patch="/api/customer/{{ customer.id }}" hx-swap="none" class="customer-form"
         hx-disabled-elt="button[type=submit]"
         hx-on::after-request="handleCustomerFormSubmit(event)">
 
         <div class="form-group">
             <label for="name">Name *</label>
-            <input type="text" id="name" name="name" required class="form-control" placeholder="Enter customer name">
+            <input type="text" id="name" name="name" required class="form-control" placeholder="Enter customer name" value="{{ customer.name }}">
         </div>
 
         <div class="form-group">
             <label for="email">Email *</label>
-            <input type="email" id="email" name="email" required class="form-control" placeholder="Enter email address">
+            <input type="email" id="email" name="email" required class="form-control" placeholder="Enter email address" value="{{ customer.email }}">
         </div>
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter phone number">
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter phone number" value="{{ customer.phone }}">
         </div>
 
         <div class="form-group">
             <label for="address">Address</label>
-            <textarea id="address" name="address" class="form-control" rows="3" placeholder="Enter address"></textarea>
+            <textarea id="address" name="address" class="form-control" rows="3" placeholder="Enter address">{{ customer.address }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="identificationType">Identification Type</label>
-            <select id="identificationType" name="identificationType" class="form-control">
+            <select id="identificationType" name="identificationType" class="form-control" data-current-value="{{ customer.identificationType }}">
                 <option value="">Select identification type</option>
                 {{#each identificationTypes}}
                 <option value="{{this}}">{{this}}</option>
@@ -43,12 +43,12 @@
         <div class="form-group">
             <label for="identificationNumber">Identification Number</label>
             <input type="text" id="identificationNumber" name="identificationNumber" class="form-control"
-                placeholder="Enter identification number">
+                placeholder="Enter identification number" value="{{ customer.identificationNumber }}">
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Create Customer</button>
-            <a href="/api/customer" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Update Customer</button>
+            <a href="/customer" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
@@ -188,11 +188,21 @@
             const notification = document.getElementById('success-notification');
             notification.style.display = 'block';
             
-            event.target.reset();
-            
+            // Redirect to customer list after 2 seconds
             setTimeout(() => {
-                notification.style.display = 'none';
-            }, 5000);
+                window.location.href = '/customer';
+            }, 2000);
         }
     }
+
+    // Handle select option selection for identificationType
+    document.addEventListener('DOMContentLoaded', function() {
+        const select = document.getElementById('identificationType');
+        if (select) {
+            const currentValue = select.getAttribute('data-current-value');
+            if (currentValue && currentValue !== '') {
+                select.value = currentValue;
+            }
+        }
+    });
 </script>

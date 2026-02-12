@@ -19,16 +19,7 @@ export class CustomerController {
 
   @Post()
   create(@Body() createCustomerDto: CreateCustomerDto) {
-    console.log(createCustomerDto);
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          successfulaaaa: true,
-          message: 'Customer created successfully',
-        });
-      }, 9000);
-    });
+    return this.customerService.create(createCustomerDto);
   }
 
   @Get()
